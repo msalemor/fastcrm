@@ -1,6 +1,6 @@
 # FastCRM
 
-A fast ERP with limited functionality to demo different technologies
+A simple CRM with limited functionality to demo different technologies
 
 ## Development Settings
 
