@@ -19,7 +19,7 @@ APP_PORT=3000
 
 ### Static Assets
 
-Publis static assets to:
+Publish static assets to:
 
 ```
 ./server/www
