@@ -2,6 +2,6 @@ package common
 
 import "fastcrm/models"
 
-func Migrate() {
-	GetDb().AutoMigrate(&models.Lead{})
+func GormMigrate() {
+	GetDb().AutoMigrate(&models.Lead{}, &models.Contact{}, &models.Account{})
 }

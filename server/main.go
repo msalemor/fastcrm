@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
+	common.GormMigrate()
+
 	app := common.GetApp()
 	common.MapRoutes()
 

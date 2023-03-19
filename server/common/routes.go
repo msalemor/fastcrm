@@ -8,6 +8,7 @@ import (
 
 func MapRoutes() {
 	app := GetApp()
+	db := GetDb()
 
 	// Default config
 	app.Use(logger.New())
@@ -16,4 +17,5 @@ func MapRoutes() {
 
 	app.Static("/", "./www")
 
+	MapLeads(app, db)
 }
