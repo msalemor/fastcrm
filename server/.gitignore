@@ -16,3 +16,4 @@
 .env
 fastcrm
 www/
+*.http

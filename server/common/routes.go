@@ -1,14 +1,16 @@
 package common
 
 import (
+	"fastcrm/controller"
+
+	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
+	"gorm.io/gorm"
 )
 
-func MapRoutes() {
-	app := GetApp()
-	db := GetDb()
+func MapRoutes(app *fiber.App, db *gorm.DB) {
 
 	// Default config
 	app.Use(logger.New())
@@ -17,5 +19,6 @@ func MapRoutes() {
 
 	app.Static("/", "./www")
 
-	MapLeads(app, db)
+	controller.RegisterLeads(app, db)
+
 }

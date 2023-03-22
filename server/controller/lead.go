@@ -1,13 +1,19 @@
-package common
+package controller
+
+// q: what does SOLID stand for?
+// a: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
+// q: What is single responsibility?
+// a: A class should have one, and only one, reason to change.
 
 import (
 	"fastcrm/models"
 
 	"github.com/gofiber/fiber/v2"
+	log "github.com/sirupsen/logrus"
 	"gorm.io/gorm"
 )
 
-func MapLeads(app *fiber.App, db *gorm.DB) {
+func RegisterLeads(app *fiber.App, db *gorm.DB) {
 
 	// GET all leads
 	app.Get("/api/leads", func(c *fiber.Ctx) error {
@@ -29,8 +35,12 @@ func MapLeads(app *fiber.App, db *gorm.DB) {
 	// POST a new lead
 	app.Post("/api/leads", func(c *fiber.Ctx) error {
 		lead := new(models.Lead)
-		if err := c.BodyParser(lead); err != nil {
+		err := c.BodyParser(lead)
+		log.Info(lead)
+		if err != nil {
 			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"message": "Bad Request"})
+		} else if lead.FirstName == "" || lead.LastName == "" || lead.Email == "" || lead.Phone == "" {
+			return c.Status(fiber.StatusBadGateway).JSON(fiber.Map{"message": "Bad Request. One or more missing required fields (first, last, email, phone.)"})
 		}
 		db.Create(&lead)
 		return c.JSON(lead)

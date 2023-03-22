@@ -41,7 +41,7 @@ func (a *App) LoadEnvSettings() {
 }
 
 // Get app instance
-func getInstance() *App {
+func getAppInstance() *App {
 	if app == nil {
 		app = &App{}
 
@@ -69,13 +69,13 @@ func getInstance() *App {
 }
 
 func GetApp() *fiber.App {
-	return getInstance().FApp
+	return getAppInstance().FApp
 }
 
 func GetDb() *gorm.DB {
-	return getInstance().Db
+	return getAppInstance().Db
 }
 
 func GetAppSettings() Settings {
-	return getInstance().Settings
+	return getAppInstance().Settings
 }
